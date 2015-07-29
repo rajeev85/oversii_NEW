@@ -1,0 +1,46 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+     padding-bottom:420px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-default{margin-top:-50px; padding-bottom:15px; padding-top:15px;}
+.hidden {
+     display:none;
+}
+
+.footer{
+    background-color:lightgray;
+    font-size:18px;
+    color:black;
+    font-family:Arial;
+    padding-bottom:30px;
+
+}
+
+.head-container{
+       min-height:100%;
+   position:relative;
+}
+
+.container-register{
+     display: inline-block;
+    text-align: center;
+}
+
+.btn-bold{
+    font-weight:bolder;
+}

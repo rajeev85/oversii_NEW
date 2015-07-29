@@ -1,0 +1,61 @@
+﻿@model Oversii.Models.ViewModel.propertyList
+
+@{
+    ViewBag.Title = "ZipCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.MyList = TempData["MyList"];
+}
+
+@if (@ViewBag.MyList != null)
+{
+    <style>
+        .hideZip{display:none}
+    </style>
+    <div class="col-md-offset-3">
+        <h4>Please select the property you wish to register at.</h4>
+    </div>
+    <hr />
+    <div class="form-horizontal col-md-offset-4 col-md-10">
+        @using (Html.BeginForm())
+        {
+            @Html.DropDownList("propertyID", new SelectList(ViewBag.MyList, "propID", "propertyName"), "  -----Select Property-----  ")
+            <br /><br />
+            <div class="label label-danger">@ViewBag.Message</div>
+            <br /><br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Submit" name="submittype" class="btn btn-default btn-bold" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="hideZip">
+    <div class="col-md-offset-3">
+        <h4>Please enter the zip code of the property you wish to register at.</h4>
+    </div>
+
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Check ZipCode" name="submittype" class="btn btn-default btn-bold" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

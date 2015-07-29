@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Oversii.Models.DB.subdivision>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_DashBoard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SubDivisionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastUpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastUpdatedUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.property.propertyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubDivisionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastUpdatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastUpdatedUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.property.propertyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.subDivisionID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.subDivisionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.subDivisionID })
+        </td>
+    </tr>
+}
+
+</table>

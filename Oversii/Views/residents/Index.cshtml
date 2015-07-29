@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Oversii.Models.DB.resident>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MailingAddr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MailingCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MailingState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MailingZipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedParkingUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.house_address.HouseAddressName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.property.propertyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.street.StreetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.subdivision.SubDivisionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user.FirstName)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailingAddr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailingCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailingState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailingZipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedParkingUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.house_address.HouseAddressName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.property.propertyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.street.StreetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subdivision.SubDivisionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.FirstName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ResidentID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ResidentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ResidentID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

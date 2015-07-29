@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9c19fc0ff444933b439f7297defa5c2" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="oversiiModel.Address" Width="1.5" PointX="10.5" PointY="28.25" />
+        <EntityTypeShape EntityType="oversiiModel.Audittrail" Width="1.5" PointX="0.75" PointY="25.75" />
+        <EntityTypeShape EntityType="oversiiModel.AuditTrailUpdation" Width="1.5" PointX="3" PointY="36.125" />
+        <EntityTypeShape EntityType="oversiiModel.Citation" Width="1.5" PointX="8.25" PointY="33.125" />
+        <EntityTypeShape EntityType="oversiiModel.Email" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="oversiiModel.House" Width="1.5" PointX="6" PointY="26.125" />
+        <EntityTypeShape EntityType="oversiiModel.ManagerRequest" Width="1.5" PointX="11.25" PointY="33.125" />
+        <EntityTypeShape EntityType="oversiiModel.Permit" Width="1.5" PointX="5.25" PointY="21.375" />
+        <EntityTypeShape EntityType="oversiiModel.PermitPayment" Width="1.5" PointX="3" PointY="21.125" />
+        <EntityTypeShape EntityType="oversiiModel.PermitStatus" Width="1.5" PointX="3" PointY="25.75" />
+        <EntityTypeShape EntityType="oversiiModel.Phone" Width="1.5" PointX="3.75" PointY="16" />
+        <EntityTypeShape EntityType="oversiiModel.Property" Width="1.5" PointX="18" PointY="25.375" />
+        <EntityTypeShape EntityType="oversiiModel.PropertyHistoryTrackingType" Width="1.5" PointX="15.75" PointY="23.875" />
+        <EntityTypeShape EntityType="oversiiModel.PropertyManagement" Width="1.5" PointX="15.75" PointY="27.25" />
+        <EntityTypeShape EntityType="oversiiModel.PropertyManager" Width="1.5" PointX="12.75" PointY="27.25" />
+        <EntityTypeShape EntityType="oversiiModel.ProperytViolation" Width="1.5" PointX="20.25" PointY="23" />
+        <EntityTypeShape EntityType="oversiiModel.Resident" Width="1.5" PointX="8.25" PointY="28" />
+        <EntityTypeShape EntityType="oversiiModel.ResidentStatu" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="oversiiModel.Role" Width="1.5" PointX="3.75" PointY="13.75" />
+        <EntityTypeShape EntityType="oversiiModel.Street" Width="1.5" PointX="5.25" PointY="30" />
+        <EntityTypeShape EntityType="oversiiModel.SubDivision" Width="1.5" PointX="3" PointY="28.5" />
+        <EntityTypeShape EntityType="oversiiModel.SubDivisionManager" Width="1.5" PointX="16" PointY="31" />
+        <EntityTypeShape EntityType="oversiiModel.User" Width="1.5" PointX="6" PointY="13.875" />
+        <EntityTypeShape EntityType="oversiiModel.Varience" Width="1.5" PointX="20.25" PointY="32.625" />
+        <EntityTypeShape EntityType="oversiiModel.VarienceStatu" Width="1.5" PointX="18" PointY="35.125" />
+        <EntityTypeShape EntityType="oversiiModel.Vehicle" Width="1.5" PointX="13.5" PointY="33.375" />
+        <EntityTypeShape EntityType="oversiiModel.VehicleColor" Width="1.5" PointX="3" PointY="41.875" />
+        <EntityTypeShape EntityType="oversiiModel.VehicleMake" Width="1.5" PointX="3" PointY="38.625" />
+        <EntityTypeShape EntityType="oversiiModel.ViolationList" Width="1.5" PointX="3" PointY="18.375" />
+        <AssociationConnector Association="oversiiModel.fk_propertyManager_Address" />
+        <AssociationConnector Association="oversiiModel.fk_propertymangement_address" />
+        <AssociationConnector Association="oversiiModel.fk_audittrailupdation_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_house_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_permitpayment_audittrial" />
+        <AssociationConnector Association="oversiiModel.fk_proertymangement_audittrial" />
+        <AssociationConnector Association="oversiiModel.fk_property_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_propertyManager_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_ProperytViolation_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_street_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_suddivision_Audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_vehicle_audittral" />
+        <AssociationConnector Association="oversiiModel.fk_vehiclecolor_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_vehiclemake_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_violationlist_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_Citation_house" />
+        <AssociationConnector Association="oversiiModel.fk_Citation_property" />
+        <AssociationConnector Association="oversiiModel.fk_Citation_street" />
+        <AssociationConnector Association="oversiiModel.fk_Citation_subdivision" />
+        <AssociationConnector Association="oversiiModel.fk_Citation_vehiclecolor" />
+        <AssociationConnector Association="oversiiModel.fk_Citationvehiclemake" />
+        <AssociationConnector Association="oversiiModel.fk_house_Street" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_house" />
+        <AssociationConnector Association="oversiiModel.fk_resident_House" />
+        <AssociationConnector Association="oversiiModel.fk_varience_house" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_property" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_street" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_subdivision" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_vehiclecolor" />
+        <AssociationConnector Association="oversiiModel.fk_ManagerRequest_vehiclemake" />
+        <AssociationConnector Association="oversiiModel.fk_permit_Permitpayment" />
+        <AssociationConnector Association="oversiiModel.fk_permit_permitstatus" />
+        <AssociationConnector Association="oversiiModel.fk_property_HistoryTracking" />
+        <AssociationConnector Association="oversiiModel.fk_property_propertymangementid" />
+        <AssociationConnector Association="oversiiModel.fk_ProperytViolation_Property" />
+        <AssociationConnector Association="oversiiModel.fk_varience_property" />
+        <AssociationConnector Association="oversiiModel.fk_subdivisionmanger_propertymanger" />
+        <AssociationConnector Association="oversiiModel.fk_ProperytViolation_Violation" />
+        <AssociationConnector Association="oversiiModel.fk_resident_street" />
+        <AssociationConnector Association="oversiiModel.fk_resident_user" />
+        <AssociationConnector Association="oversiiModel.fk_vehicle_resient" />
+        <AssociationConnector Association="oversiiModel.Fk_User_Role" />
+        <AssociationConnector Association="oversiiModel.fk_street_subdivision" />
+        <AssociationConnector Association="oversiiModel.fk_varience_street" />
+        <AssociationConnector Association="oversiiModel.fk_subdivisionmanger_Subdivision" />
+        <AssociationConnector Association="oversiiModel.fk_varience_subdivision" />
+        <AssociationConnector Association="oversiiModel.fk_subdivisionmanager_user" />
+        <AssociationConnector Association="oversiiModel.FK_User_audittrail" />
+        <AssociationConnector Association="oversiiModel.fk_varience_variencestatus" />
+        <AssociationConnector Association="oversiiModel.fk_varience_vehiclecolor" />
+        <AssociationConnector Association="oversiiModel.fk_varience_vehiclemake" />
+        <AssociationConnector Association="oversiiModel.fk_vehicle_vehiclecolor" />
+        <AssociationConnector Association="oversiiModel.fk_vehicle_vehiclemake" />
+        <AssociationConnector Association="oversiiModel.ResidentMailingAddress" />
+        <AssociationConnector Association="oversiiModel.UserPhone" />
+        <AssociationConnector Association="oversiiModel.fk_permit_vehicle" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

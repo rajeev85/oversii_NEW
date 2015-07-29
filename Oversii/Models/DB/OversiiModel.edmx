@@ -1,0 +1,3020 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="oversiiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="ZIP" Type="int" />
+        </EntityType>
+        <EntityType Name="Audittrail">
+          <Key>
+            <PropertyRef Name="AudittrailID" />
+          </Key>
+          <Property Name="AudittrailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreationDateTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuditTrailUpdation">
+          <Key>
+            <PropertyRef Name="AuditTrialID" />
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="AuditTrialID" Type="int" Nullable="false" />
+          <Property Name="UpdateID" Type="int" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Citation">
+          <Key>
+            <PropertyRef Name="CitationID" />
+          </Key>
+          <Property Name="CitationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="SubDivisionID" Type="int" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="HouseId" Type="int" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+          <Property Name="VehicleColorID" Type="int" Nullable="false" />
+          <Property Name="PatrolTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Latitude" Type="geometry" />
+          <Property Name="Longitude" Type="geometry" />
+          <Property Name="License" Type="varchar" MaxLength="10" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="HouseID" />
+          </Key>
+          <Property Name="HouseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="HouseAddressName" Type="varchar" MaxLength="255" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerRequest">
+          <Key>
+            <PropertyRef Name="ManagerRequestID" />
+          </Key>
+          <Property Name="ManagerRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="SubdivisionID" Type="int" Nullable="false" />
+          <Property Name="HouseID" Type="int" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="VehicleColorID" Type="int" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" />
+          <Property Name="PatrolManComment" Type="varchar" MaxLength="100" />
+          <Property Name="ManagerComment" Type="varchar" MaxLength="100" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permit">
+          <Key>
+            <PropertyRef Name="PermitID" />
+          </Key>
+          <Property Name="PermitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime2" Precision="7" />
+          <Property Name="ExpiryDate" Type="datetime2" Precision="7" />
+          <Property Name="PermitNum" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PermitStatusID" Type="int" Nullable="false" />
+          <Property Name="PermitPaymentID" Type="int" />
+          <Property Name="VehicleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermitPayment">
+          <Key>
+            <PropertyRef Name="PermitPaymentID" />
+          </Key>
+          <Property Name="PermitPaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Notice30Day" Type="datetime2" Precision="7" />
+          <Property Name="Notice15Day" Type="datetime2" Precision="7" />
+          <Property Name="Notice10Day" Type="datetime2" Precision="7" />
+          <Property Name="NoticeDisable" Type="bit" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermitStatus">
+          <Key>
+            <PropertyRef Name="PermitStatusID" />
+          </Key>
+          <Property Name="PermitStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropID" />
+          </Key>
+          <Property Name="PropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PropertyMgmtID" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ParkingGL" Type="varchar" MaxLength="255" />
+          <Property Name="PropertyManagerEditing" Type="bit" Nullable="false" />
+          <Property Name="24HrGracePeriod" Type="bit" Nullable="false" />
+          <Property Name="AssignedParkingSpace" Type="bit" Nullable="false" />
+          <Property Name="OverSiiSendingLetterFines" Type="bit" Nullable="false" />
+          <Property Name="HasPM" Type="bit" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+          <Property Name="HistoryTrackingTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyHistoryTrackingType">
+          <Key>
+            <PropertyRef Name="PropertyHistoryTrackingID" />
+          </Key>
+          <Property Name="PropertyHistoryTrackingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrackingType" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyManagement">
+          <Key>
+            <PropertyRef Name="PropertyMgmtID" />
+          </Key>
+          <Property Name="PropertyMgmtID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddressID" Type="int" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyManager">
+          <Key>
+            <PropertyRef Name="PropertyManagerID" />
+          </Key>
+          <Property Name="PropertyManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="AuditTrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProperytViolation">
+          <Key>
+            <PropertyRef Name="ProperytViolationID" />
+          </Key>
+          <Property Name="ProperytViolationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="ViolationID" Type="int" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resident">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SubDivisionID" Type="int" Nullable="false" />
+          <Property Name="AssignedParkingUnit" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="HouseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResidentMailingAddress">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="ResidentID" Type="int" Nullable="false" />
+          <Property Name="AddressID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResidentStatus">
+          <Key>
+            <PropertyRef Name="ResidentStatusID" />
+          </Key>
+          <Property Name="ResidentStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="StreetID" />
+          </Key>
+          <Property Name="StreetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreetName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SubdivisionID" Type="int" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubDivision">
+          <Key>
+            <PropertyRef Name="SubDivisionID" />
+          </Key>
+          <Property Name="SubDivisionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubDivisionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubDivisionManager">
+          <Key>
+            <PropertyRef Name="SubDivisionManagerID" />
+          </Key>
+          <Property Name="SubDivisionManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubDivisionID" Type="int" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="PropertyManagerID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPhone">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PhoneID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Varience">
+          <Key>
+            <PropertyRef Name="VarienceID" />
+          </Key>
+          <Property Name="VarienceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropID" Type="int" Nullable="false" />
+          <Property Name="SubDivisionID" Type="int" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="HouseId" Type="int" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+          <Property Name="VehicleColorID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" />
+          <Property Name="License" Type="varchar" MaxLength="10" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+          <Property Name="VarienceStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VarienceStatus">
+          <Key>
+            <PropertyRef Name="VarienceStatusID" />
+          </Key>
+          <Property Name="VarienceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+          <Property Name="VehicleColorID" Type="int" Nullable="false" />
+          <Property Name="ResidentId" Type="int" Nullable="false" />
+          <Property Name="MakeYear" Type="smallint" />
+          <Property Name="LicPlateNum" Type="varchar" MaxLength="10" />
+          <Property Name="LicPlateState" Type="char" MaxLength="2" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleColor">
+          <Key>
+            <PropertyRef Name="VehicleColorID" />
+          </Key>
+          <Property Name="VehicleColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="VehicleMakeID" />
+          </Key>
+          <Property Name="VehicleMakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MakeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViolationList">
+          <Key>
+            <PropertyRef Name="ViolationID" />
+          </Key>
+          <Property Name="ViolationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ViolationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AudittrailID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_audittrailupdation_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="AuditTrailUpdation" Type="Self.AuditTrailUpdation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="AuditTrailUpdation">
+              <PropertyRef Name="AuditTrialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_house">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_subdivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_vehiclecolor">
+          <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citationvehiclemake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Citation" Type="Self.Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_house_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_house_Street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_house">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_subdivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="SubdivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_vehiclecolor">
+          <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_vehiclemake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="ManagerRequest" Type="Self.ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permit_Permitpayment">
+          <End Role="PermitPayment" Type="Self.PermitPayment" Multiplicity="0..1" />
+          <End Role="Permit" Type="Self.Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermitPayment">
+              <PropertyRef Name="PermitPaymentID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="PermitPaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permit_permitstatus">
+          <End Role="PermitStatus" Type="Self.PermitStatus" Multiplicity="1" />
+          <End Role="Permit" Type="Self.Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermitStatus">
+              <PropertyRef Name="PermitStatusID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="PermitStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permit_vehicle">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Permit" Type="Self.Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permitpayment_audittrial">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="PermitPayment" Type="Self.PermitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PermitPayment">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proertymangement_audittrial">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="PropertyManagement" Type="Self.PropertyManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PropertyManagement">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_HistoryTracking">
+          <End Role="PropertyHistoryTrackingType" Type="Self.PropertyHistoryTrackingType" Multiplicity="1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyHistoryTrackingType">
+              <PropertyRef Name="PropertyHistoryTrackingID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="HistoryTrackingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_propertymangementid">
+          <End Role="PropertyManagement" Type="Self.PropertyManagement" Multiplicity="0..1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyManagement">
+              <PropertyRef Name="PropertyMgmtID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="PropertyMgmtID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_propertyManager_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="PropertyManager" Type="Self.PropertyManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="PropertyManager">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_propertyManager_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="PropertyManager" Type="Self.PropertyManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PropertyManager">
+              <PropertyRef Name="AuditTrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_propertymangement_address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="PropertyManagement" Type="Self.PropertyManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="PropertyManagement">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="ProperytViolation" Type="Self.ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="ProperytViolation" Type="Self.ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_Violation">
+          <End Role="ViolationList" Type="Self.ViolationList" Multiplicity="1" />
+          <End Role="ProperytViolation" Type="Self.ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViolationList">
+              <PropertyRef Name="ViolationID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="ViolationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_House">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_user">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ResidentMailingAdd_resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="1" />
+          <End Role="ResidentMailingAddress" Type="Self.ResidentMailingAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="ResidentMailingAddress">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_residnetMailingAdd_add">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="ResidentMailingAddress" Type="Self.ResidentMailingAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="ResidentMailingAddress">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_street_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="Street" Type="Self.Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_street_subdivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="0..1" />
+          <End Role="Street" Type="Self.Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="SubdivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanager_user">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="SubDivisionManager" Type="Self.SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanger_propertymanger">
+          <End Role="PropertyManager" Type="Self.PropertyManager" Multiplicity="1" />
+          <End Role="SubDivisionManager" Type="Self.SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyManager">
+              <PropertyRef Name="PropertyManagerID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="PropertyManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanger_Subdivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="1" />
+          <End Role="SubDivisionManager" Type="Self.SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_suddivision_Audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="SubDivision">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_audittrail">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User1" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userphone_phone">
+          <End Role="Phone" Type="Self.Phone" Multiplicity="1" />
+          <End Role="UserPhone" Type="Self.UserPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="PhoneID" />
+            </Principal>
+            <Dependent Role="UserPhone">
+              <PropertyRef Name="PhoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userphone_user">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPhone" Type="Self.UserPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserPhone">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_house">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_subdivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_variencestatus">
+          <End Role="VarienceStatus" Type="Self.VarienceStatus" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VarienceStatus">
+              <PropertyRef Name="VarienceStatusID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VarienceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_vehiclecolor">
+          <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_vehiclemake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Varience" Type="Self.Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_audittral">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_resient">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="ResidentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_vehiclecolor">
+          <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_vehiclemake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehiclecolor_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="VehicleColor">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehiclemake_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="VehicleMake">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_violationlist_audittrail">
+          <End Role="Audittrail" Type="Self.Audittrail" Multiplicity="1" />
+          <End Role="ViolationList" Type="Self.ViolationList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="ViolationList">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="insertpermit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VehicleMakeID" Type="int" Mode="In" />
+          <Parameter Name="VehicleColorID" Type="int" Mode="In" />
+          <Parameter Name="ResidentID" Type="int" Mode="In" />
+          <Parameter Name="MakeYear" Type="smallint" Mode="In" />
+          <Parameter Name="LicPlateNum" Type="varchar" Mode="In" />
+          <Parameter Name="LicPlateState" Type="char" Mode="In" />
+        </Function>
+        <Function Name="SelectVehicleColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectVehicleMake" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="oversiiModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audittrail" EntityType="Self.Audittrail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditTrailUpdation" EntityType="Self.AuditTrailUpdation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citation" EntityType="Self.Citation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerRequest" EntityType="Self.ManagerRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permit" EntityType="Self.Permit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermitPayment" EntityType="Self.PermitPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermitStatus" EntityType="Self.PermitStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyHistoryTrackingType" EntityType="Self.PropertyHistoryTrackingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyManagement" EntityType="Self.PropertyManagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyManager" EntityType="Self.PropertyManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProperytViolation" EntityType="Self.ProperytViolation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resident" EntityType="Self.Resident" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentMailingAddress" EntityType="Self.ResidentMailingAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentStatus" EntityType="Self.ResidentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubDivision" EntityType="Self.SubDivision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubDivisionManager" EntityType="Self.SubDivisionManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPhone" EntityType="Self.UserPhone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Varience" EntityType="Self.Varience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VarienceStatus" EntityType="Self.VarienceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleColor" EntityType="Self.VehicleColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViolationList" EntityType="Self.ViolationList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_audittrailupdation_audittrail" Association="Self.fk_audittrailupdation_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="AuditTrailUpdation" EntitySet="AuditTrailUpdation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_house" Association="Self.fk_Citation_house">
+            <End Role="House" EntitySet="House" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_property" Association="Self.fk_Citation_property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_street" Association="Self.fk_Citation_street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_subdivision" Association="Self.fk_Citation_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_vehiclecolor" Association="Self.fk_Citation_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColor" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citationvehiclemake" Association="Self.fk_Citationvehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="Citation" EntitySet="Citation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_house_audittrail" Association="Self.fk_house_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="fk_house_Street" Association="Self.fk_house_Street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_house" Association="Self.fk_ManagerRequest_house">
+            <End Role="House" EntitySet="House" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_property" Association="Self.fk_ManagerRequest_property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_street" Association="Self.fk_ManagerRequest_street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_subdivision" Association="Self.fk_ManagerRequest_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_vehiclecolor" Association="Self.fk_ManagerRequest_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColor" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_vehiclemake" Association="Self.fk_ManagerRequest_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permit_Permitpayment" Association="Self.fk_permit_Permitpayment">
+            <End Role="PermitPayment" EntitySet="PermitPayment" />
+            <End Role="Permit" EntitySet="Permit" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permit_permitstatus" Association="Self.fk_permit_permitstatus">
+            <End Role="PermitStatus" EntitySet="PermitStatus" />
+            <End Role="Permit" EntitySet="Permit" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permit_vehicle" Association="Self.fk_permit_vehicle">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="Permit" EntitySet="Permit" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permitpayment_audittrial" Association="Self.fk_permitpayment_audittrial">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="PermitPayment" EntitySet="PermitPayment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proertymangement_audittrial" Association="Self.fk_proertymangement_audittrial">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="PropertyManagement" EntitySet="PropertyManagement" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_audittrail" Association="Self.fk_property_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_HistoryTracking" Association="Self.fk_property_HistoryTracking">
+            <End Role="PropertyHistoryTrackingType" EntitySet="PropertyHistoryTrackingType" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_propertymangementid" Association="Self.fk_property_propertymangementid">
+            <End Role="PropertyManagement" EntitySet="PropertyManagement" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+          <AssociationSet Name="fk_propertyManager_Address" Association="Self.fk_propertyManager_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="PropertyManager" EntitySet="PropertyManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_propertyManager_audittrail" Association="Self.fk_propertyManager_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="PropertyManager" EntitySet="PropertyManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_propertymangement_address" Association="Self.fk_propertymangement_address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="PropertyManagement" EntitySet="PropertyManagement" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_audittrail" Association="Self.fk_ProperytViolation_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_Property" Association="Self.fk_ProperytViolation_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_Violation" Association="Self.fk_ProperytViolation_Violation">
+            <End Role="ViolationList" EntitySet="ViolationList" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_House" Association="Self.fk_resident_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_street" Association="Self.fk_resident_street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_user" Association="Self.fk_resident_user">
+            <End Role="User" EntitySet="User" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ResidentMailingAdd_resident" Association="Self.fk_ResidentMailingAdd_resident">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="ResidentMailingAddress" EntitySet="ResidentMailingAddress" />
+          </AssociationSet>
+          <AssociationSet Name="fk_residnetMailingAdd_add" Association="Self.fk_residnetMailingAdd_add">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="ResidentMailingAddress" EntitySet="ResidentMailingAddress" />
+          </AssociationSet>
+          <AssociationSet Name="fk_street_audittrail" Association="Self.fk_street_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="Street" EntitySet="Street" />
+          </AssociationSet>
+          <AssociationSet Name="fk_street_subdivision" Association="Self.fk_street_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
+            <End Role="Street" EntitySet="Street" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanager_user" Association="Self.fk_subdivisionmanager_user">
+            <End Role="User" EntitySet="User" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanger_propertymanger" Association="Self.fk_subdivisionmanger_propertymanger">
+            <End Role="PropertyManager" EntitySet="PropertyManager" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanger_Subdivision" Association="Self.fk_subdivisionmanger_Subdivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_suddivision_Audittrail" Association="Self.fk_suddivision_Audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="SubDivision" EntitySet="SubDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_audittrail" Association="Self.FK_User_audittrail">
+            <End Role="User" EntitySet="User" />
+            <End Role="User1" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_User_Role" Association="Self.Fk_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userphone_phone" Association="Self.fk_userphone_phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="UserPhone" EntitySet="UserPhone" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userphone_user" Association="Self.fk_userphone_user">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPhone" EntitySet="UserPhone" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_house" Association="Self.fk_varience_house">
+            <End Role="House" EntitySet="House" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_property" Association="Self.fk_varience_property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_street" Association="Self.fk_varience_street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_subdivision" Association="Self.fk_varience_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_variencestatus" Association="Self.fk_varience_variencestatus">
+            <End Role="VarienceStatus" EntitySet="VarienceStatus" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_vehiclecolor" Association="Self.fk_varience_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColor" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_vehiclemake" Association="Self.fk_varience_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="Varience" EntitySet="Varience" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_audittral" Association="Self.fk_vehicle_audittral">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_resient" Association="Self.fk_vehicle_resient">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_vehiclecolor" Association="Self.fk_vehicle_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColor" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_vehiclemake" Association="Self.fk_vehicle_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehiclecolor_audittrail" Association="Self.fk_vehiclecolor_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="VehicleColor" EntitySet="VehicleColor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehiclemake_audittrail" Association="Self.fk_vehiclemake_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+          </AssociationSet>
+          <AssociationSet Name="fk_violationlist_audittrail" Association="Self.fk_violationlist_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrail" />
+            <End Role="ViolationList" EntitySet="ViolationList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="oversiiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="oversiiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="oversiiModel.Address" />
+          <EntitySet Name="Audittrails" EntityType="oversiiModel.Audittrail" />
+          <EntitySet Name="AuditTrailUpdations" EntityType="oversiiModel.AuditTrailUpdation" />
+          <EntitySet Name="Citations" EntityType="oversiiModel.Citation" />
+          <EntitySet Name="Emails" EntityType="oversiiModel.Email" />
+          <EntitySet Name="Houses" EntityType="oversiiModel.House" />
+          <EntitySet Name="ManagerRequests" EntityType="oversiiModel.ManagerRequest" />
+          <EntitySet Name="Permits" EntityType="oversiiModel.Permit" />
+          <EntitySet Name="PermitPayments" EntityType="oversiiModel.PermitPayment" />
+          <EntitySet Name="PermitStatus" EntityType="oversiiModel.PermitStatus" />
+          <EntitySet Name="Phones" EntityType="oversiiModel.Phone" />
+          <EntitySet Name="Properties" EntityType="oversiiModel.Property" />
+          <EntitySet Name="PropertyHistoryTrackingTypes" EntityType="oversiiModel.PropertyHistoryTrackingType" />
+          <EntitySet Name="PropertyManagements" EntityType="oversiiModel.PropertyManagement" />
+          <EntitySet Name="PropertyManagers" EntityType="oversiiModel.PropertyManager" />
+          <EntitySet Name="ProperytViolations" EntityType="oversiiModel.ProperytViolation" />
+          <EntitySet Name="Residents" EntityType="oversiiModel.Resident" />
+          <EntitySet Name="ResidentStatus" EntityType="oversiiModel.ResidentStatu" />
+          <EntitySet Name="Roles" EntityType="oversiiModel.Role" />
+          <EntitySet Name="Streets" EntityType="oversiiModel.Street" />
+          <EntitySet Name="SubDivisions" EntityType="oversiiModel.SubDivision" />
+          <EntitySet Name="SubDivisionManagers" EntityType="oversiiModel.SubDivisionManager" />
+          <EntitySet Name="Users" EntityType="oversiiModel.User" />
+          <EntitySet Name="Variences" EntityType="oversiiModel.Varience" />
+          <EntitySet Name="VarienceStatus" EntityType="oversiiModel.VarienceStatu" />
+          <EntitySet Name="Vehicles" EntityType="oversiiModel.Vehicle" />
+          <EntitySet Name="VehicleColors" EntityType="oversiiModel.VehicleColor" />
+          <EntitySet Name="VehicleMakes" EntityType="oversiiModel.VehicleMake" />
+          <EntitySet Name="ViolationLists" EntityType="oversiiModel.ViolationList" />
+          <AssociationSet Name="fk_propertyManager_Address" Association="oversiiModel.fk_propertyManager_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="PropertyManager" EntitySet="PropertyManagers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_propertymangement_address" Association="oversiiModel.fk_propertymangement_address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="PropertyManagement" EntitySet="PropertyManagements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_audittrailupdation_audittrail" Association="oversiiModel.fk_audittrailupdation_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="AuditTrailUpdation" EntitySet="AuditTrailUpdations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_house_audittrail" Association="oversiiModel.fk_house_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="House" EntitySet="Houses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permitpayment_audittrial" Association="oversiiModel.fk_permitpayment_audittrial">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="PermitPayment" EntitySet="PermitPayments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proertymangement_audittrial" Association="oversiiModel.fk_proertymangement_audittrial">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="PropertyManagement" EntitySet="PropertyManagements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_audittrail" Association="oversiiModel.fk_property_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="fk_propertyManager_audittrail" Association="oversiiModel.fk_propertyManager_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="PropertyManager" EntitySet="PropertyManagers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_audittrail" Association="oversiiModel.fk_ProperytViolation_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_street_audittrail" Association="oversiiModel.fk_street_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="Street" EntitySet="Streets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_suddivision_Audittrail" Association="oversiiModel.fk_suddivision_Audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_audittral" Association="oversiiModel.fk_vehicle_audittral">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehiclecolor_audittrail" Association="oversiiModel.fk_vehiclecolor_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="VehicleColor" EntitySet="VehicleColors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehiclemake_audittrail" Association="oversiiModel.fk_vehiclemake_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_violationlist_audittrail" Association="oversiiModel.fk_violationlist_audittrail">
+            <End Role="Audittrail" EntitySet="Audittrails" />
+            <End Role="ViolationList" EntitySet="ViolationLists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_house" Association="oversiiModel.fk_Citation_house">
+            <End Role="House" EntitySet="Houses" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_property" Association="oversiiModel.fk_Citation_property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_street" Association="oversiiModel.fk_Citation_street">
+            <End Role="Street" EntitySet="Streets" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_subdivision" Association="oversiiModel.fk_Citation_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citation_vehiclecolor" Association="oversiiModel.fk_Citation_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColors" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Citationvehiclemake" Association="oversiiModel.fk_Citationvehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="Citation" EntitySet="Citations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_house_Street" Association="oversiiModel.fk_house_Street">
+            <End Role="Street" EntitySet="Streets" />
+            <End Role="House" EntitySet="Houses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_house" Association="oversiiModel.fk_ManagerRequest_house">
+            <End Role="House" EntitySet="Houses" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_House" Association="oversiiModel.fk_resident_House">
+            <End Role="House" EntitySet="Houses" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_house" Association="oversiiModel.fk_varience_house">
+            <End Role="House" EntitySet="Houses" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_property" Association="oversiiModel.fk_ManagerRequest_property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_street" Association="oversiiModel.fk_ManagerRequest_street">
+            <End Role="Street" EntitySet="Streets" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_subdivision" Association="oversiiModel.fk_ManagerRequest_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_vehiclecolor" Association="oversiiModel.fk_ManagerRequest_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColors" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerRequest_vehiclemake" Association="oversiiModel.fk_ManagerRequest_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="ManagerRequest" EntitySet="ManagerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permit_Permitpayment" Association="oversiiModel.fk_permit_Permitpayment">
+            <End Role="PermitPayment" EntitySet="PermitPayments" />
+            <End Role="Permit" EntitySet="Permits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_permit_permitstatus" Association="oversiiModel.fk_permit_permitstatus">
+            <End Role="PermitStatu" EntitySet="PermitStatus" />
+            <End Role="Permit" EntitySet="Permits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_HistoryTracking" Association="oversiiModel.fk_property_HistoryTracking">
+            <End Role="PropertyHistoryTrackingType" EntitySet="PropertyHistoryTrackingTypes" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_propertymangementid" Association="oversiiModel.fk_property_propertymangementid">
+            <End Role="PropertyManagement" EntitySet="PropertyManagements" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_Property" Association="oversiiModel.fk_ProperytViolation_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_property" Association="oversiiModel.fk_varience_property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanger_propertymanger" Association="oversiiModel.fk_subdivisionmanger_propertymanger">
+            <End Role="PropertyManager" EntitySet="PropertyManagers" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManagers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProperytViolation_Violation" Association="oversiiModel.fk_ProperytViolation_Violation">
+            <End Role="ViolationList" EntitySet="ViolationLists" />
+            <End Role="ProperytViolation" EntitySet="ProperytViolations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_street" Association="oversiiModel.fk_resident_street">
+            <End Role="Street" EntitySet="Streets" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="fk_resident_user" Association="oversiiModel.fk_resident_user">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_resient" Association="oversiiModel.fk_vehicle_resient">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_User_Role" Association="oversiiModel.Fk_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_street_subdivision" Association="oversiiModel.fk_street_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="Street" EntitySet="Streets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_street" Association="oversiiModel.fk_varience_street">
+            <End Role="Street" EntitySet="Streets" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanger_Subdivision" Association="oversiiModel.fk_subdivisionmanger_Subdivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManagers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_subdivision" Association="oversiiModel.fk_varience_subdivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subdivisionmanager_user" Association="oversiiModel.fk_subdivisionmanager_user">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SubDivisionManager" EntitySet="SubDivisionManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_audittrail" Association="oversiiModel.FK_User_audittrail">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_variencestatus" Association="oversiiModel.fk_varience_variencestatus">
+            <End Role="VarienceStatu" EntitySet="VarienceStatus" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_vehiclecolor" Association="oversiiModel.fk_varience_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColors" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_varience_vehiclemake" Association="oversiiModel.fk_varience_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="Varience" EntitySet="Variences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_vehiclecolor" Association="oversiiModel.fk_vehicle_vehiclecolor">
+            <End Role="VehicleColor" EntitySet="VehicleColors" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_vehiclemake" Association="oversiiModel.fk_vehicle_vehiclemake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="ResidentMailingAddress" Association="oversiiModel.ResidentMailingAddress">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="UserPhone" Association="oversiiModel.UserPhone">
+            <End Role="Phone" EntitySet="Phones" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="AuthenticateUser" ReturnType="Collection(oversiiModel.AuthenticateUser_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="fk_permit_vehicle" Association="oversiiModel.fk_permit_vehicle">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Permit" EntitySet="Permits" />
+          </AssociationSet>
+          <FunctionImport Name="GetVehicleMake" EntitySet="VehicleMakes" ReturnType="Collection(oversiiModel.VehicleMake)" />
+          <FunctionImport Name="GetVehicleColor" EntitySet="VehicleColors" ReturnType="Collection(oversiiModel.VehicleColor)" />
+          <FunctionImport Name="ApplyPermit">
+            <Parameter Name="VehicleMakeID" Mode="In" Type="Int32" />
+            <Parameter Name="VehicleColorID" Mode="In" Type="Int32" />
+            <Parameter Name="ResidentID" Mode="In" Type="Int32" />
+            <Parameter Name="MakeYear" Mode="In" Type="Int16" />
+            <Parameter Name="LicPlateNum" Mode="In" Type="String" />
+            <Parameter Name="LicPlateState" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZIP" Type="Int32" />
+          <NavigationProperty Name="PropertyManagers" Relationship="oversiiModel.fk_propertyManager_Address" FromRole="Address" ToRole="PropertyManager" />
+          <NavigationProperty Name="PropertyManagements" Relationship="oversiiModel.fk_propertymangement_address" FromRole="Address" ToRole="PropertyManagement" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.ResidentMailingAddress" FromRole="Address" ToRole="Resident" />
+        </EntityType>
+        <EntityType Name="Audittrail">
+          <Key>
+            <PropertyRef Name="AudittrailID" />
+          </Key>
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="AuditTrailUpdations" Relationship="oversiiModel.fk_audittrailupdation_audittrail" FromRole="Audittrail" ToRole="AuditTrailUpdation" />
+          <NavigationProperty Name="Houses" Relationship="oversiiModel.fk_house_audittrail" FromRole="Audittrail" ToRole="House" />
+          <NavigationProperty Name="PermitPayments" Relationship="oversiiModel.fk_permitpayment_audittrial" FromRole="Audittrail" ToRole="PermitPayment" />
+          <NavigationProperty Name="PropertyManagements" Relationship="oversiiModel.fk_proertymangement_audittrial" FromRole="Audittrail" ToRole="PropertyManagement" />
+          <NavigationProperty Name="Properties" Relationship="oversiiModel.fk_property_audittrail" FromRole="Audittrail" ToRole="Property" />
+          <NavigationProperty Name="PropertyManagers" Relationship="oversiiModel.fk_propertyManager_audittrail" FromRole="Audittrail" ToRole="PropertyManager" />
+          <NavigationProperty Name="ProperytViolations" Relationship="oversiiModel.fk_ProperytViolation_audittrail" FromRole="Audittrail" ToRole="ProperytViolation" />
+          <NavigationProperty Name="Streets" Relationship="oversiiModel.fk_street_audittrail" FromRole="Audittrail" ToRole="Street" />
+          <NavigationProperty Name="SubDivisions" Relationship="oversiiModel.fk_suddivision_Audittrail" FromRole="Audittrail" ToRole="SubDivision" />
+          <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_audittral" FromRole="Audittrail" ToRole="Vehicle" />
+          <NavigationProperty Name="VehicleColors" Relationship="oversiiModel.fk_vehiclecolor_audittrail" FromRole="Audittrail" ToRole="VehicleColor" />
+          <NavigationProperty Name="VehicleMakes" Relationship="oversiiModel.fk_vehiclemake_audittrail" FromRole="Audittrail" ToRole="VehicleMake" />
+          <NavigationProperty Name="ViolationLists" Relationship="oversiiModel.fk_violationlist_audittrail" FromRole="Audittrail" ToRole="ViolationList" />
+        </EntityType>
+        <EntityType Name="AuditTrailUpdation">
+          <Key>
+            <PropertyRef Name="AuditTrialID" />
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="AuditTrialID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_audittrailupdation_audittrail" FromRole="AuditTrailUpdation" ToRole="Audittrail" />
+        </EntityType>
+        <EntityType Name="Citation">
+          <Key>
+            <PropertyRef Name="CitationID" />
+          </Key>
+          <Property Name="CitationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="SubDivisionID" Type="Int32" Nullable="false" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="HouseId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleColorID" Type="Int32" Nullable="false" />
+          <Property Name="PatrolTimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Latitude" Type="Geometry" />
+          <Property Name="Longitude" Type="Geometry" />
+          <Property Name="License" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="oversiiModel.fk_Citation_house" FromRole="Citation" ToRole="House" />
+          <NavigationProperty Name="Property" Relationship="oversiiModel.fk_Citation_property" FromRole="Citation" ToRole="Property" />
+          <NavigationProperty Name="Street" Relationship="oversiiModel.fk_Citation_street" FromRole="Citation" ToRole="Street" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_Citation_subdivision" FromRole="Citation" ToRole="SubDivision" />
+          <NavigationProperty Name="VehicleColor" Relationship="oversiiModel.fk_Citation_vehiclecolor" FromRole="Citation" ToRole="VehicleColor" />
+          <NavigationProperty Name="VehicleMake" Relationship="oversiiModel.fk_Citationvehiclemake" FromRole="Citation" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="HouseID" />
+          </Key>
+          <Property Name="HouseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="HouseAddressName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_house_audittrail" FromRole="House" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citation_house" FromRole="House" ToRole="Citation" />
+          <NavigationProperty Name="Street" Relationship="oversiiModel.fk_house_Street" FromRole="House" ToRole="Street" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_house" FromRole="House" ToRole="ManagerRequest" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.fk_resident_House" FromRole="House" ToRole="Resident" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_house" FromRole="House" ToRole="Varience" />
+        </EntityType>
+        <EntityType Name="ManagerRequest">
+          <Key>
+            <PropertyRef Name="ManagerRequestID" />
+          </Key>
+          <Property Name="ManagerRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="SubdivisionID" Type="Int32" Nullable="false" />
+          <Property Name="HouseID" Type="Int32" Nullable="false" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleColorID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Precision="7" />
+          <Property Name="PatrolManComment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerComment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="oversiiModel.fk_ManagerRequest_house" FromRole="ManagerRequest" ToRole="House" />
+          <NavigationProperty Name="Property" Relationship="oversiiModel.fk_ManagerRequest_property" FromRole="ManagerRequest" ToRole="Property" />
+          <NavigationProperty Name="Street" Relationship="oversiiModel.fk_ManagerRequest_street" FromRole="ManagerRequest" ToRole="Street" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_ManagerRequest_subdivision" FromRole="ManagerRequest" ToRole="SubDivision" />
+          <NavigationProperty Name="VehicleColor" Relationship="oversiiModel.fk_ManagerRequest_vehiclecolor" FromRole="ManagerRequest" ToRole="VehicleColor" />
+          <NavigationProperty Name="VehicleMake" Relationship="oversiiModel.fk_ManagerRequest_vehiclemake" FromRole="ManagerRequest" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="Permit">
+          <Key>
+            <PropertyRef Name="PermitID" />
+          </Key>
+          <Property Name="PermitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssueDate" Type="DateTime" Precision="7" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="7" />
+          <Property Name="PermitNum" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PermitStatusID" Type="Int32" Nullable="false" />
+          <Property Name="PermitPaymentID" Type="Int32" />
+          <NavigationProperty Name="PermitPayment" Relationship="oversiiModel.fk_permit_Permitpayment" FromRole="Permit" ToRole="PermitPayment" />
+          <NavigationProperty Name="PermitStatu" Relationship="oversiiModel.fk_permit_permitstatus" FromRole="Permit" ToRole="PermitStatu" />
+          <Property Name="VehicleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vehicle" Relationship="oversiiModel.fk_permit_vehicle" FromRole="Permit" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="PermitPayment">
+          <Key>
+            <PropertyRef Name="PermitPaymentID" />
+          </Key>
+          <Property Name="PermitPaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Notice30Day" Type="DateTime" Precision="7" />
+          <Property Name="Notice15Day" Type="DateTime" Precision="7" />
+          <Property Name="Notice10Day" Type="DateTime" Precision="7" />
+          <Property Name="NoticeDisable" Type="Boolean" Nullable="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_permitpayment_audittrial" FromRole="PermitPayment" ToRole="Audittrail" />
+          <NavigationProperty Name="Permits" Relationship="oversiiModel.fk_permit_Permitpayment" FromRole="PermitPayment" ToRole="Permit" />
+        </EntityType>
+        <EntityType Name="PermitStatus">
+          <Key>
+            <PropertyRef Name="PermitStatusID" />
+          </Key>
+          <Property Name="PermitStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Permits" Relationship="oversiiModel.fk_permit_permitstatus" FromRole="PermitStatu" ToRole="Permit" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="oversiiModel.UserPhone" FromRole="Phone" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropID" />
+          </Key>
+          <Property Name="PropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyMgmtID" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ParkingGL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyManagerEditing" Type="Boolean" Nullable="false" />
+          <Property Name="C24HrGracePeriod" Type="Boolean" Nullable="false" />
+          <Property Name="AssignedParkingSpace" Type="Boolean" Nullable="false" />
+          <Property Name="OverSiiSendingLetterFines" Type="Boolean" Nullable="false" />
+          <Property Name="HasPM" Type="Boolean" Nullable="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <Property Name="HistoryTrackingTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_property_audittrail" FromRole="Property" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citation_property" FromRole="Property" ToRole="Citation" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_property" FromRole="Property" ToRole="ManagerRequest" />
+          <NavigationProperty Name="PropertyHistoryTrackingType" Relationship="oversiiModel.fk_property_HistoryTracking" FromRole="Property" ToRole="PropertyHistoryTrackingType" />
+          <NavigationProperty Name="PropertyManagement" Relationship="oversiiModel.fk_property_propertymangementid" FromRole="Property" ToRole="PropertyManagement" />
+          <NavigationProperty Name="ProperytViolations" Relationship="oversiiModel.fk_ProperytViolation_Property" FromRole="Property" ToRole="ProperytViolation" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_property" FromRole="Property" ToRole="Varience" />
+        </EntityType>
+        <EntityType Name="PropertyHistoryTrackingType">
+          <Key>
+            <PropertyRef Name="PropertyHistoryTrackingID" />
+          </Key>
+          <Property Name="PropertyHistoryTrackingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrackingType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Properties" Relationship="oversiiModel.fk_property_HistoryTracking" FromRole="PropertyHistoryTrackingType" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="PropertyManagement">
+          <Key>
+            <PropertyRef Name="PropertyMgmtID" />
+          </Key>
+          <Property Name="PropertyMgmtID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddressID" Type="Int32" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="oversiiModel.fk_propertymangement_address" FromRole="PropertyManagement" ToRole="Address" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_proertymangement_audittrial" FromRole="PropertyManagement" ToRole="Audittrail" />
+          <NavigationProperty Name="Properties" Relationship="oversiiModel.fk_property_propertymangementid" FromRole="PropertyManagement" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="PropertyManager">
+          <Key>
+            <PropertyRef Name="PropertyManagerID" />
+          </Key>
+          <Property Name="PropertyManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="AuditTrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="oversiiModel.fk_propertyManager_Address" FromRole="PropertyManager" ToRole="Address" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_propertyManager_audittrail" FromRole="PropertyManager" ToRole="Audittrail" />
+          <NavigationProperty Name="SubDivisionManagers" Relationship="oversiiModel.fk_subdivisionmanger_propertymanger" FromRole="PropertyManager" ToRole="SubDivisionManager" />
+        </EntityType>
+        <EntityType Name="ProperytViolation">
+          <Key>
+            <PropertyRef Name="ProperytViolationID" />
+          </Key>
+          <Property Name="ProperytViolationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="ViolationID" Type="Int32" Nullable="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_ProperytViolation_audittrail" FromRole="ProperytViolation" ToRole="Audittrail" />
+          <NavigationProperty Name="Property" Relationship="oversiiModel.fk_ProperytViolation_Property" FromRole="ProperytViolation" ToRole="Property" />
+          <NavigationProperty Name="ViolationList" Relationship="oversiiModel.fk_ProperytViolation_Violation" FromRole="ProperytViolation" ToRole="ViolationList" />
+        </EntityType>
+        <EntityType Name="Resident">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SubDivisionID" Type="Int32" Nullable="false" />
+          <Property Name="AssignedParkingUnit" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="HouseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="oversiiModel.fk_resident_House" FromRole="Resident" ToRole="House" />
+          <NavigationProperty Name="Street" Relationship="oversiiModel.fk_resident_street" FromRole="Resident" ToRole="Street" />
+          <NavigationProperty Name="User" Relationship="oversiiModel.fk_resident_user" FromRole="Resident" ToRole="User" />
+          <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_resient" FromRole="Resident" ToRole="Vehicle" />
+          <NavigationProperty Name="Addresses" Relationship="oversiiModel.ResidentMailingAddress" FromRole="Resident" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="ResidentStatu">
+          <Key>
+            <PropertyRef Name="ResidentStatusID" />
+          </Key>
+          <Property Name="ResidentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="oversiiModel.Fk_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="StreetID" />
+          </Key>
+          <Property Name="StreetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreetName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SubdivisionID" Type="Int32" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_street_audittrail" FromRole="Street" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citation_street" FromRole="Street" ToRole="Citation" />
+          <NavigationProperty Name="Houses" Relationship="oversiiModel.fk_house_Street" FromRole="Street" ToRole="House" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_street" FromRole="Street" ToRole="ManagerRequest" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.fk_resident_street" FromRole="Street" ToRole="Resident" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_street_subdivision" FromRole="Street" ToRole="SubDivision" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_street" FromRole="Street" ToRole="Varience" />
+        </EntityType>
+        <EntityType Name="SubDivision">
+          <Key>
+            <PropertyRef Name="SubDivisionID" />
+          </Key>
+          <Property Name="SubDivisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubDivisionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_suddivision_Audittrail" FromRole="SubDivision" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citation_subdivision" FromRole="SubDivision" ToRole="Citation" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_subdivision" FromRole="SubDivision" ToRole="ManagerRequest" />
+          <NavigationProperty Name="Streets" Relationship="oversiiModel.fk_street_subdivision" FromRole="SubDivision" ToRole="Street" />
+          <NavigationProperty Name="SubDivisionManagers" Relationship="oversiiModel.fk_subdivisionmanger_Subdivision" FromRole="SubDivision" ToRole="SubDivisionManager" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_subdivision" FromRole="SubDivision" ToRole="Varience" />
+        </EntityType>
+        <EntityType Name="SubDivisionManager">
+          <Key>
+            <PropertyRef Name="SubDivisionManagerID" />
+          </Key>
+          <Property Name="SubDivisionManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubDivisionID" Type="Int32" Nullable="false" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyManagerID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PropertyManager" Relationship="oversiiModel.fk_subdivisionmanger_propertymanger" FromRole="SubDivisionManager" ToRole="PropertyManager" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_subdivisionmanger_Subdivision" FromRole="SubDivisionManager" ToRole="SubDivision" />
+          <NavigationProperty Name="User" Relationship="oversiiModel.fk_subdivisionmanager_user" FromRole="SubDivisionManager" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.fk_resident_user" FromRole="User" ToRole="Resident" />
+          <NavigationProperty Name="Role" Relationship="oversiiModel.Fk_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="SubDivisionManagers" Relationship="oversiiModel.fk_subdivisionmanager_user" FromRole="User" ToRole="SubDivisionManager" />
+          <NavigationProperty Name="User1" Relationship="oversiiModel.FK_User_audittrail" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="User2" Relationship="oversiiModel.FK_User_audittrail" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="Phones" Relationship="oversiiModel.UserPhone" FromRole="User" ToRole="Phone" />
+        </EntityType>
+        <EntityType Name="Varience">
+          <Key>
+            <PropertyRef Name="VarienceID" />
+          </Key>
+          <Property Name="VarienceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropID" Type="Int32" Nullable="false" />
+          <Property Name="SubDivisionID" Type="Int32" Nullable="false" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="HouseId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleMakeID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleColorID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Precision="7" />
+          <Property Name="License" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <Property Name="VarienceStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="oversiiModel.fk_varience_house" FromRole="Varience" ToRole="House" />
+          <NavigationProperty Name="Property" Relationship="oversiiModel.fk_varience_property" FromRole="Varience" ToRole="Property" />
+          <NavigationProperty Name="Street" Relationship="oversiiModel.fk_varience_street" FromRole="Varience" ToRole="Street" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_varience_subdivision" FromRole="Varience" ToRole="SubDivision" />
+          <NavigationProperty Name="VarienceStatu" Relationship="oversiiModel.fk_varience_variencestatus" FromRole="Varience" ToRole="VarienceStatu" />
+          <NavigationProperty Name="VehicleColor" Relationship="oversiiModel.fk_varience_vehiclecolor" FromRole="Varience" ToRole="VehicleColor" />
+          <NavigationProperty Name="VehicleMake" Relationship="oversiiModel.fk_varience_vehiclemake" FromRole="Varience" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="VarienceStatu">
+          <Key>
+            <PropertyRef Name="VarienceStatusID" />
+          </Key>
+          <Property Name="VarienceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_variencestatus" FromRole="VarienceStatu" ToRole="Varience" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleMakeID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleColorID" Type="Int32" Nullable="false" />
+          <Property Name="ResidentId" Type="Int32" Nullable="false" />
+          <Property Name="MakeYear" Type="Int16" />
+          <Property Name="LicPlateNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LicPlateState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_vehicle_audittral" FromRole="Vehicle" ToRole="Audittrail" />
+          <NavigationProperty Name="Resident" Relationship="oversiiModel.fk_vehicle_resient" FromRole="Vehicle" ToRole="Resident" />
+          <NavigationProperty Name="VehicleColor" Relationship="oversiiModel.fk_vehicle_vehiclecolor" FromRole="Vehicle" ToRole="VehicleColor" />
+          <NavigationProperty Name="VehicleMake" Relationship="oversiiModel.fk_vehicle_vehiclemake" FromRole="Vehicle" ToRole="VehicleMake" />
+          <NavigationProperty Name="Permits" Relationship="oversiiModel.fk_permit_vehicle" FromRole="Vehicle" ToRole="Permit" />
+        </EntityType>
+        <EntityType Name="VehicleColor">
+          <Key>
+            <PropertyRef Name="VehicleColorID" />
+          </Key>
+          <Property Name="VehicleColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_vehiclecolor_audittrail" FromRole="VehicleColor" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citation_vehiclecolor" FromRole="VehicleColor" ToRole="Citation" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_vehiclecolor" FromRole="VehicleColor" ToRole="ManagerRequest" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_vehiclecolor" FromRole="VehicleColor" ToRole="Varience" />
+          <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_vehiclecolor" FromRole="VehicleColor" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="VehicleMakeID" />
+          </Key>
+          <Property Name="VehicleMakeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MakeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_vehiclemake_audittrail" FromRole="VehicleMake" ToRole="Audittrail" />
+          <NavigationProperty Name="Citations" Relationship="oversiiModel.fk_Citationvehiclemake" FromRole="VehicleMake" ToRole="Citation" />
+          <NavigationProperty Name="ManagerRequests" Relationship="oversiiModel.fk_ManagerRequest_vehiclemake" FromRole="VehicleMake" ToRole="ManagerRequest" />
+          <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_vehiclemake" FromRole="VehicleMake" ToRole="Varience" />
+          <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_vehiclemake" FromRole="VehicleMake" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="ViolationList">
+          <Key>
+            <PropertyRef Name="ViolationID" />
+          </Key>
+          <Property Name="ViolationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ViolationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AudittrailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_violationlist_audittrail" FromRole="ViolationList" ToRole="Audittrail" />
+          <NavigationProperty Name="ProperytViolations" Relationship="oversiiModel.fk_ProperytViolation_Violation" FromRole="ViolationList" ToRole="ProperytViolation" />
+        </EntityType>
+        <Association Name="fk_propertyManager_Address">
+          <End Type="oversiiModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="oversiiModel.PropertyManager" Role="PropertyManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="PropertyManager">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_propertymangement_address">
+          <End Type="oversiiModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="oversiiModel.PropertyManagement" Role="PropertyManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="PropertyManagement">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_audittrailupdation_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.AuditTrailUpdation" Role="AuditTrailUpdation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="AuditTrailUpdation">
+              <PropertyRef Name="AuditTrialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_house_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permitpayment_audittrial">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.PermitPayment" Role="PermitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PermitPayment">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proertymangement_audittrial">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.PropertyManagement" Role="PropertyManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PropertyManagement">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_propertyManager_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.PropertyManager" Role="PropertyManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="PropertyManager">
+              <PropertyRef Name="AuditTrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.ProperytViolation" Role="ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_street_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_suddivision_Audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="SubDivision">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_audittral">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehiclecolor_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.VehicleColor" Role="VehicleColor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="VehicleColor">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehiclemake_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.VehicleMake" Role="VehicleMake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="VehicleMake">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_violationlist_audittrail">
+          <End Type="oversiiModel.Audittrail" Role="Audittrail" Multiplicity="1" />
+          <End Type="oversiiModel.ViolationList" Role="ViolationList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audittrail">
+              <PropertyRef Name="AudittrailID" />
+            </Principal>
+            <Dependent Role="ViolationList">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_house">
+          <End Type="oversiiModel.House" Role="House" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_property">
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_street">
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_subdivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citation_vehiclecolor">
+          <End Type="oversiiModel.VehicleColor" Role="VehicleColor" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Citationvehiclemake">
+          <End Type="oversiiModel.VehicleMake" Role="VehicleMake" Multiplicity="1" />
+          <End Type="oversiiModel.Citation" Role="Citation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Citation">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_house_Street">
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="1" />
+          <End Type="oversiiModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_house">
+          <End Type="oversiiModel.House" Role="House" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_House">
+          <End Type="oversiiModel.House" Role="House" Multiplicity="1" />
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_house">
+          <End Type="oversiiModel.House" Role="House" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_property">
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_street">
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_subdivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="SubdivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_vehiclecolor">
+          <End Type="oversiiModel.VehicleColor" Role="VehicleColor" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerRequest_vehiclemake">
+          <End Type="oversiiModel.VehicleMake" Role="VehicleMake" Multiplicity="1" />
+          <End Type="oversiiModel.ManagerRequest" Role="ManagerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="ManagerRequest">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permit_Permitpayment">
+          <End Type="oversiiModel.PermitPayment" Role="PermitPayment" Multiplicity="0..1" />
+          <End Type="oversiiModel.Permit" Role="Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermitPayment">
+              <PropertyRef Name="PermitPaymentID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="PermitPaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_permit_permitstatus">
+          <End Type="oversiiModel.PermitStatus" Role="PermitStatu" Multiplicity="1" />
+          <End Type="oversiiModel.Permit" Role="Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermitStatu">
+              <PropertyRef Name="PermitStatusID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="PermitStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_HistoryTracking">
+          <End Type="oversiiModel.PropertyHistoryTrackingType" Role="PropertyHistoryTrackingType" Multiplicity="1" />
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyHistoryTrackingType">
+              <PropertyRef Name="PropertyHistoryTrackingID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="HistoryTrackingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_propertymangementid">
+          <End Type="oversiiModel.PropertyManagement" Role="PropertyManagement" Multiplicity="0..1" />
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyManagement">
+              <PropertyRef Name="PropertyMgmtID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="PropertyMgmtID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_Property">
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="oversiiModel.ProperytViolation" Role="ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_property">
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanger_propertymanger">
+          <End Type="oversiiModel.PropertyManager" Role="PropertyManager" Multiplicity="1" />
+          <End Type="oversiiModel.SubDivisionManager" Role="SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyManager">
+              <PropertyRef Name="PropertyManagerID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="PropertyManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProperytViolation_Violation">
+          <End Type="oversiiModel.ViolationList" Role="ViolationList" Multiplicity="1" />
+          <End Type="oversiiModel.ProperytViolation" Role="ProperytViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViolationList">
+              <PropertyRef Name="ViolationID" />
+            </Principal>
+            <Dependent Role="ProperytViolation">
+              <PropertyRef Name="ViolationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_street">
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="1" />
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_resident_user">
+          <End Type="oversiiModel.User" Role="User" Multiplicity="1" />
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_resient">
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="1" />
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="ResidentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_User_Role">
+          <End Type="oversiiModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="oversiiModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_street_subdivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="0..1" />
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="SubdivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_street">
+          <End Type="oversiiModel.Street" Role="Street" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanger_Subdivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="1" />
+          <End Type="oversiiModel.SubDivisionManager" Role="SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_subdivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subdivisionmanager_user">
+          <End Type="oversiiModel.User" Role="User" Multiplicity="1" />
+          <End Type="oversiiModel.SubDivisionManager" Role="SubDivisionManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SubDivisionManager">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_audittrail">
+          <End Type="oversiiModel.User" Role="User" Multiplicity="1" />
+          <End Type="oversiiModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="AudittrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_variencestatus">
+          <End Type="oversiiModel.VarienceStatu" Role="VarienceStatu" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VarienceStatu">
+              <PropertyRef Name="VarienceStatusID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VarienceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_vehiclecolor">
+          <End Type="oversiiModel.VehicleColor" Role="VehicleColor" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_varience_vehiclemake">
+          <End Type="oversiiModel.VehicleMake" Role="VehicleMake" Multiplicity="1" />
+          <End Type="oversiiModel.Varience" Role="Varience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Varience">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_vehiclecolor">
+          <End Type="oversiiModel.VehicleColor" Role="VehicleColor" Multiplicity="1" />
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleColor">
+              <PropertyRef Name="VehicleColorID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="VehicleColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_vehiclemake">
+          <End Type="oversiiModel.VehicleMake" Role="VehicleMake" Multiplicity="1" />
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResidentMailingAddress">
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <End Type="oversiiModel.Address" Role="Address" Multiplicity="*" />
+        </Association>
+        <Association Name="UserPhone">
+          <End Type="oversiiModel.Phone" Role="Phone" Multiplicity="*" />
+          <End Type="oversiiModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="AuthenticateUser_Result">
+          <Property Type="String" Name="Emailid" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="password" Nullable="true" />
+          <Property Type="String" Name="ErrMsg" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Role" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="IsLoginSuccess" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+        </ComplexType>
+        <Association Name="fk_permit_vehicle">
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="oversiiModel.Permit" Role="Permit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Permit">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="VehiclePermit" >
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="oversiiModelStoreContainer" CdmEntityContainer="oversiiEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="oversiiModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audittrails">
+            <EntityTypeMapping TypeName="oversiiModel.Audittrail">
+              <MappingFragment StoreEntitySet="Audittrail">
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditTrailUpdations">
+            <EntityTypeMapping TypeName="oversiiModel.AuditTrailUpdation">
+              <MappingFragment StoreEntitySet="AuditTrailUpdation">
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="AuditTrialID" ColumnName="AuditTrialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citations">
+            <EntityTypeMapping TypeName="oversiiModel.Citation">
+              <MappingFragment StoreEntitySet="Citation">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="PatrolTimeStamp" ColumnName="PatrolTimeStamp" />
+                <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="SubDivisionID" ColumnName="SubDivisionID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="CitationID" ColumnName="CitationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="oversiiModel.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="Email1" ColumnName="Email" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Houses">
+            <EntityTypeMapping TypeName="oversiiModel.House">
+              <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="HouseAddressName" ColumnName="HouseAddressName" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerRequests">
+            <EntityTypeMapping TypeName="oversiiModel.ManagerRequest">
+              <MappingFragment StoreEntitySet="ManagerRequest">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="ManagerComment" ColumnName="ManagerComment" />
+                <ScalarProperty Name="PatrolManComment" ColumnName="PatrolManComment" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+                <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="SubdivisionID" ColumnName="SubdivisionID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="ManagerRequestID" ColumnName="ManagerRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permits">
+            <EntityTypeMapping TypeName="oversiiModel.Permit">
+              <MappingFragment StoreEntitySet="Permit">
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="PermitPaymentID" ColumnName="PermitPaymentID" />
+                <ScalarProperty Name="PermitStatusID" ColumnName="PermitStatusID" />
+                <ScalarProperty Name="PermitNum" ColumnName="PermitNum" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="PermitID" ColumnName="PermitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermitPayments">
+            <EntityTypeMapping TypeName="oversiiModel.PermitPayment">
+              <MappingFragment StoreEntitySet="PermitPayment">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="NoticeDisable" ColumnName="NoticeDisable" />
+                <ScalarProperty Name="Notice10Day" ColumnName="Notice10Day" />
+                <ScalarProperty Name="Notice15Day" ColumnName="Notice15Day" />
+                <ScalarProperty Name="Notice30Day" ColumnName="Notice30Day" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PermitPaymentID" ColumnName="PermitPaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermitStatus">
+            <EntityTypeMapping TypeName="oversiiModel.PermitStatus">
+              <MappingFragment StoreEntitySet="PermitStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PermitStatusID" ColumnName="PermitStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phones">
+            <EntityTypeMapping TypeName="oversiiModel.Phone">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="oversiiModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="HistoryTrackingTypeID" ColumnName="HistoryTrackingTypeID" />
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="HasPM" ColumnName="HasPM" />
+                <ScalarProperty Name="OverSiiSendingLetterFines" ColumnName="OverSiiSendingLetterFines" />
+                <ScalarProperty Name="AssignedParkingSpace" ColumnName="AssignedParkingSpace" />
+                <ScalarProperty Name="C24HrGracePeriod" ColumnName="24HrGracePeriod" />
+                <ScalarProperty Name="PropertyManagerEditing" ColumnName="PropertyManagerEditing" />
+                <ScalarProperty Name="ParkingGL" ColumnName="ParkingGL" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PropertyMgmtID" ColumnName="PropertyMgmtID" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyHistoryTrackingTypes">
+            <EntityTypeMapping TypeName="oversiiModel.PropertyHistoryTrackingType">
+              <MappingFragment StoreEntitySet="PropertyHistoryTrackingType">
+                <ScalarProperty Name="TrackingType" ColumnName="TrackingType" />
+                <ScalarProperty Name="PropertyHistoryTrackingID" ColumnName="PropertyHistoryTrackingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyManagements">
+            <EntityTypeMapping TypeName="oversiiModel.PropertyManagement">
+              <MappingFragment StoreEntitySet="PropertyManagement">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PropertyMgmtID" ColumnName="PropertyMgmtID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyManagers">
+            <EntityTypeMapping TypeName="oversiiModel.PropertyManager">
+              <MappingFragment StoreEntitySet="PropertyManager">
+                <ScalarProperty Name="AuditTrailID" ColumnName="AuditTrailID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PropertyManagerID" ColumnName="PropertyManagerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProperytViolations">
+            <EntityTypeMapping TypeName="oversiiModel.ProperytViolation">
+              <MappingFragment StoreEntitySet="ProperytViolation">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="ViolationID" ColumnName="ViolationID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="ProperytViolationID" ColumnName="ProperytViolationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residents">
+            <EntityTypeMapping TypeName="oversiiModel.Resident">
+              <MappingFragment StoreEntitySet="Resident">
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="AssignedParkingUnit" ColumnName="AssignedParkingUnit" />
+                <ScalarProperty Name="SubDivisionID" ColumnName="SubDivisionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentStatus">
+            <EntityTypeMapping TypeName="oversiiModel.ResidentStatu">
+              <MappingFragment StoreEntitySet="ResidentStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ResidentStatusID" ColumnName="ResidentStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="oversiiModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Streets">
+            <EntityTypeMapping TypeName="oversiiModel.Street">
+              <MappingFragment StoreEntitySet="Street">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="SubdivisionID" ColumnName="SubdivisionID" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubDivisions">
+            <EntityTypeMapping TypeName="oversiiModel.SubDivision">
+              <MappingFragment StoreEntitySet="SubDivision">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="SubDivisionName" ColumnName="SubDivisionName" />
+                <ScalarProperty Name="SubDivisionID" ColumnName="SubDivisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubDivisionManagers">
+            <EntityTypeMapping TypeName="oversiiModel.SubDivisionManager">
+              <MappingFragment StoreEntitySet="SubDivisionManager">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PropertyManagerID" ColumnName="PropertyManagerID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="SubDivisionID" ColumnName="SubDivisionID" />
+                <ScalarProperty Name="SubDivisionManagerID" ColumnName="SubDivisionManagerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="oversiiModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variences">
+            <EntityTypeMapping TypeName="oversiiModel.Varience">
+              <MappingFragment StoreEntitySet="Varience">
+                <ScalarProperty Name="VarienceStatusID" ColumnName="VarienceStatusID" />
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="SubDivisionID" ColumnName="SubDivisionID" />
+                <ScalarProperty Name="PropID" ColumnName="PropID" />
+                <ScalarProperty Name="VarienceID" ColumnName="VarienceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VarienceStatus">
+            <EntityTypeMapping TypeName="oversiiModel.VarienceStatu">
+              <MappingFragment StoreEntitySet="VarienceStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="VarienceStatusID" ColumnName="VarienceStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="oversiiModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="LicPlateState" ColumnName="LicPlateState" />
+                <ScalarProperty Name="LicPlateNum" ColumnName="LicPlateNum" />
+                <ScalarProperty Name="MakeYear" ColumnName="MakeYear" />
+                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+                <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleColors">
+            <EntityTypeMapping TypeName="oversiiModel.VehicleColor">
+              <MappingFragment StoreEntitySet="VehicleColor">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleMakes">
+            <EntityTypeMapping TypeName="oversiiModel.VehicleMake">
+              <MappingFragment StoreEntitySet="VehicleMake">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="MakeName" ColumnName="MakeName" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViolationLists">
+            <EntityTypeMapping TypeName="oversiiModel.ViolationList">
+              <MappingFragment StoreEntitySet="ViolationList">
+                <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
+                <ScalarProperty Name="ViolationName" ColumnName="ViolationName" />
+                <ScalarProperty Name="ViolationID" ColumnName="ViolationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ResidentMailingAddress" TypeName="oversiiModel.ResidentMailingAddress" StoreEntitySet="ResidentMailingAddress">
+            <EndProperty Name="Address">
+              <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+            </EndProperty>
+            <EndProperty Name="Resident">
+              <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserPhone" TypeName="oversiiModel.UserPhone" StoreEntitySet="UserPhone">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="Phone">
+              <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AuthenticateUser" FunctionName="oversiiModel.Store.AuthenticateUser" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oversiiModel.AuthenticateUser_Result">
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="ErrMsg" ColumnName="ErrMsg" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsLoginSuccess" ColumnName="IsLoginSuccess" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetVehicleMake" FunctionName="oversiiModel.Store.SelectVehicleColor" />
+          <FunctionImportMapping FunctionImportName="GetVehicleColor" FunctionName="oversiiModel.Store.SelectVehicleColor" />
+          <FunctionImportMapping FunctionImportName="ApplyPermit" FunctionName="oversiiModel.Store.insertpermit" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

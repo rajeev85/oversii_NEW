@@ -1,0 +1,114 @@
+﻿@model Oversii.Models.DB.resident
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>resident</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MailingAddr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MailingAddr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MailingCity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MailingCity)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MailingState)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MailingState)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MailingZipcode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MailingZipcode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AssignedParkingUnit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AssignedParkingUnit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.house_address.HouseAddressName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.house_address.HouseAddressName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.property.propertyName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.property.propertyName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.street.StreetName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.street.StreetName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.subdivision.SubDivisionName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.subdivision.SubDivisionName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.user.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.user.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ResidentID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

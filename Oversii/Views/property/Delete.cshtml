@@ -1,0 +1,201 @@
+﻿@model Oversii.Models.DB.property
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout_DashBoard.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>property</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.propertyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.propertyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parkingGL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parkingGL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permitPerUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permitPerUnit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permitExpiry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permitExpiry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permitDelivery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permitDelivery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permitPayByHOA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permitPayByHOA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.targetVoilations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.targetVoilations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publicPatrolTarget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publicPatrolTarget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.propertyManagerEditing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.propertyManagerEditing)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.historyTrackingType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.historyTrackingType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C24hrGracePeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C24hrGracePeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.assignedParkingSpace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.assignedParkingSpace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.oversiiSendingLettersAndFines)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.oversiiSendingLettersAndFines)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hasPM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hasPM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastUpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastUpdatedUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastUpdatedUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.property_management.propertyMgmtName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.property_management.propertyMgmtName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

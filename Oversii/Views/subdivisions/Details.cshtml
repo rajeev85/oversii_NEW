@@ -1,0 +1,59 @@
+﻿@model Oversii.Models.DB.subdivision
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_DashBoard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>subdivision</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubDivisionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubDivisionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastUpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastUpdatedUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastUpdatedUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.property.propertyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.property.propertyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.subDivisionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
