@@ -28,7 +28,8 @@ namespace Oversii.Controllers
            
             ViewData["Vehicle.VehicleMake.VehicleMakeID"] = new SelectList(UR.VehilceMakeList(), "VehicleMakeID", "MakeName");
             ViewData["Vehicle.VehicleColor.VehicleColorID"] = new SelectList(UR.VehicleColorList(), "VehicleColorID", "ColorName");
-            
+            ViewData["Vehicle.State.StateID"] = new SelectList(UR.StateList(), "StateID", "State");
+
             return View();
         }
         [HttpPost]

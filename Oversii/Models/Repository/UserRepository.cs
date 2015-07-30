@@ -94,7 +94,7 @@ namespace Oversii.Models.Repository
         {
             using (oversiiEntities db = new oversiiEntities())
             {
-                db.ApplyPermit(VehiclePermit.Vehicle.VehicleMake.VehicleMakeID, VehiclePermit.Vehicle.VehicleColor.VehicleColorID, 1, VehiclePermit.Vehicle.MakeYear, VehiclePermit.Vehicle.LicPlateNum, VehiclePermit.Vehicle.LicPlateState);
+                db.ApplyPermit(VehiclePermit.Vehicle.VehicleMake.VehicleMakeID, VehiclePermit.Vehicle.VehicleColor.VehicleColorID, 1, VehiclePermit.Vehicle.MakeYear, VehiclePermit.Vehicle.LicPlateNum, VehiclePermit.Vehicle.State.StateID);
             }
         }
 
@@ -110,6 +110,17 @@ namespace Oversii.Models.Repository
             }
         }
 
+        public List<Models.DB.State> StateList()
+        {
+            using (oversiiEntities db = new oversiiEntities())
+            {
+                List<Models.DB.State> RS = new List<State>();
+                RS = db.States.ToList();
+                return RS;
+
+
+            }
+        }
         public AuthenticateUser_Result  AuthenticateUser(string email,string password)
         {
          

@@ -15,53 +15,29 @@ namespace Oversii.Models.DB
 using System;
     using System.Collections.Generic;
     
-public partial class Resident
+public partial class State
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Resident()
+    public State()
     {
 
         this.Vehicles = new HashSet<Vehicle>();
 
-        this.Addresses = new HashSet<Address>();
-
     }
 
 
-    public int ResidentID { get; set; }
+    public int StateID { get; set; }
 
-    public int PropID { get; set; }
+    public string Code { get; set; }
 
-    public int UserID { get; set; }
-
-    public int SubDivisionID { get; set; }
-
-    public string AssignedParkingUnit { get; set; }
-
-    public int StreetID { get; set; }
-
-    public int HouseID { get; set; }
+    public string State1 { get; set; }
 
 
-
-    public virtual House House { get; set; }
-
-    public virtual Street Street { get; set; }
-
-    public virtual User User { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Vehicle> Vehicles { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Address> Addresses { get; set; }
-
-    public virtual Property Property { get; set; }
-
-    public virtual SubDivision SubDivision { get; set; }
 
 }
 

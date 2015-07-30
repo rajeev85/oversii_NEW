@@ -30,6 +30,8 @@ public partial class Property
 
         this.Variences = new HashSet<Varience>();
 
+        this.Residents = new HashSet<Resident>();
+
     }
 
 
@@ -80,6 +82,10 @@ public partial class Property
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Varience> Variences { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Resident> Residents { get; set; }
 
 }
 

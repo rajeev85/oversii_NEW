@@ -32,6 +32,8 @@ public partial class SubDivision
 
         this.Variences = new HashSet<Varience>();
 
+        this.Residents = new HashSet<Resident>();
+
     }
 
 
@@ -66,6 +68,10 @@ public partial class SubDivision
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Varience> Variences { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Resident> Residents { get; set; }
 
 }
 

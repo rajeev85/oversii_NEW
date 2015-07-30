@@ -93,6 +93,8 @@ public partial class oversiiEntities : DbContext
 
     public virtual DbSet<ViolationList> ViolationLists { get; set; }
 
+    public virtual DbSet<State> States { get; set; }
+
 
     public virtual ObjectResult<AuthenticateUser_Result> AuthenticateUser(string email, string password)
     {
@@ -139,7 +141,7 @@ public partial class oversiiEntities : DbContext
     }
 
 
-    public virtual int ApplyPermit(Nullable<int> vehicleMakeID, Nullable<int> vehicleColorID, Nullable<int> residentID, Nullable<short> makeYear, string licPlateNum, string licPlateState)
+    public virtual int ApplyPermit(Nullable<int> vehicleMakeID, Nullable<int> vehicleColorID, Nullable<int> residentID, Nullable<short> makeYear, string licPlateNum, Nullable<int> stateID)
     {
 
         var vehicleMakeIDParameter = vehicleMakeID.HasValue ?
@@ -167,12 +169,26 @@ public partial class oversiiEntities : DbContext
             new ObjectParameter("LicPlateNum", typeof(string));
 
 
-        var licPlateStateParameter = licPlateState != null ?
-            new ObjectParameter("LicPlateState", licPlateState) :
-            new ObjectParameter("LicPlateState", typeof(string));
+        var stateIDParameter = stateID.HasValue ?
+            new ObjectParameter("StateID", stateID) :
+            new ObjectParameter("StateID", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ApplyPermit", vehicleMakeIDParameter, vehicleColorIDParameter, residentIDParameter, makeYearParameter, licPlateNumParameter, licPlateStateParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ApplyPermit", vehicleMakeIDParameter, vehicleColorIDParameter, residentIDParameter, makeYearParameter, licPlateNumParameter, stateIDParameter);
+    }
+
+
+    public virtual ObjectResult<State> GetState()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<State>("GetState");
+    }
+
+
+    public virtual ObjectResult<State> GetState(MergeOption mergeOption)
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<State>("GetState", mergeOption);
     }
 
 }

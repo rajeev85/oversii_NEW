@@ -39,9 +39,9 @@ public partial class Vehicle
 
     public string LicPlateNum { get; set; }
 
-    public string LicPlateState { get; set; }
-
     public int AudittrailID { get; set; }
+
+    public Nullable<int> LicPlateStateID { get; set; }
 
 
 
@@ -56,6 +56,8 @@ public partial class Vehicle
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Permit> Permits { get; set; }
+
+    public virtual State State { get; set; }
 
 }
 

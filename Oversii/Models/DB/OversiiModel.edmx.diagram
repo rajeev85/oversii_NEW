@@ -90,6 +90,10 @@
         <AssociationConnector Association="oversiiModel.ResidentMailingAddress" />
         <AssociationConnector Association="oversiiModel.UserPhone" />
         <AssociationConnector Association="oversiiModel.fk_permit_vehicle" />
+        <EntityTypeShape EntityType="oversiiModel.State" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="oversiiModel.fk_Resident_Property" />
+        <AssociationConnector Association="oversiiModel.fk_Resident_SubDivision" />
+        <AssociationConnector Association="oversiiModel.fk_vehicle_state" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

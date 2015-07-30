@@ -243,6 +243,9 @@
     <Compile Include="Models\DB\Role.cs">
       <DependentUpon>OversiiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\State.cs">
+      <DependentUpon>OversiiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\Street.cs">
       <DependentUpon>OversiiModel.tt</DependentUpon>
     </Compile>
@@ -277,6 +280,7 @@
       <DependentUpon>OversiiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository\UserRepository.cs" />
+    <Compile Include="Models\ViewModel\VState.cs" />
     <Compile Include="Models\ViewModel\VVehicle.cs" />
     <Compile Include="Models\ViewModel\VVehicleColor.cs" />
     <Compile Include="Models\ViewModel\VVehicleMake.cs" />

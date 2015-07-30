@@ -12,7 +12,7 @@ namespace Oversii.Models.ViewModel
             public int VehicleID { get; set; }
             public short MakeYear { get; set; }
             public string LicPlateNum { get; set; }
-            public string LicPlateState { get; set; }
+            public VState State { get; set; }
         public VVehicleColor VehicleColor { get; set; }
         public VVehicleMake VehicleMake { get; set; }
 

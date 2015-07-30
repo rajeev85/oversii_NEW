@@ -206,6 +206,14 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="char" MaxLength="2" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Street">
           <Key>
             <PropertyRef Name="StreetID" />
@@ -288,8 +296,8 @@
           <Property Name="ResidentId" Type="int" Nullable="false" />
           <Property Name="MakeYear" Type="smallint" />
           <Property Name="LicPlateNum" Type="varchar" MaxLength="10" />
-          <Property Name="LicPlateState" Type="char" MaxLength="2" />
           <Property Name="AudittrailID" Type="int" Nullable="false" />
+          <Property Name="LicPlateStateID" Type="int" />
         </EntityType>
         <EntityType Name="VehicleColor">
           <Key>
@@ -675,6 +683,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Resident_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_resident_street">
           <End Role="Street" Type="Self.Street" Multiplicity="1" />
           <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
@@ -684,6 +704,18 @@
             </Principal>
             <Dependent Role="Resident">
               <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Resident_SubDivision">
+          <End Role="SubDivision" Type="Self.SubDivision" Multiplicity="1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="SubDivisionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -951,6 +983,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_vehicle_state">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="LicPlateStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_vehicle_vehiclecolor">
           <End Role="VehicleColor" Type="Self.VehicleColor" Multiplicity="1" />
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
@@ -1011,18 +1055,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="AuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Password" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="insertpermit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="ApplyPermit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VehicleMakeID" Type="int" Mode="In" />
           <Parameter Name="VehicleColorID" Type="int" Mode="In" />
           <Parameter Name="ResidentID" Type="int" Mode="In" />
           <Parameter Name="MakeYear" Type="smallint" Mode="In" />
           <Parameter Name="LicPlateNum" Type="varchar" Mode="In" />
-          <Parameter Name="LicPlateState" Type="char" Mode="In" />
+          <Parameter Name="StateID" Type="int" Mode="In" />
         </Function>
+        <Function Name="AuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SelectVehicleColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SelectVehicleMake" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="oversiiModelStoreContainer">
@@ -1046,6 +1091,7 @@
           <EntitySet Name="ResidentMailingAddress" EntityType="Self.ResidentMailingAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResidentStatus" EntityType="Self.ResidentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubDivision" EntityType="Self.SubDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubDivisionManager" EntityType="Self.SubDivisionManager" Schema="dbo" store:Type="Tables" />
@@ -1177,8 +1223,16 @@
             <End Role="House" EntitySet="House" />
             <End Role="Resident" EntitySet="Resident" />
           </AssociationSet>
+          <AssociationSet Name="fk_Resident_Property" Association="Self.fk_Resident_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
           <AssociationSet Name="fk_resident_street" Association="Self.fk_resident_street">
             <End Role="Street" EntitySet="Street" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Resident_SubDivision" Association="Self.fk_Resident_SubDivision">
+            <End Role="SubDivision" EntitySet="SubDivision" />
             <End Role="Resident" EntitySet="Resident" />
           </AssociationSet>
           <AssociationSet Name="fk_resident_user" Association="Self.fk_resident_user">
@@ -1267,6 +1321,10 @@
           </AssociationSet>
           <AssociationSet Name="fk_vehicle_resient" Association="Self.fk_vehicle_resient">
             <End Role="Resident" EntitySet="Resident" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_state" Association="Self.fk_vehicle_state">
+            <End Role="State" EntitySet="State" />
             <End Role="Vehicle" EntitySet="Vehicle" />
           </AssociationSet>
           <AssociationSet Name="fk_vehicle_vehiclecolor" Association="Self.fk_vehicle_vehiclecolor">
@@ -1560,8 +1618,22 @@
             <Parameter Name="ResidentID" Mode="In" Type="Int32" />
             <Parameter Name="MakeYear" Mode="In" Type="Int16" />
             <Parameter Name="LicPlateNum" Mode="In" Type="String" />
-            <Parameter Name="LicPlateState" Mode="In" Type="String" />
+            <Parameter Name="StateID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="States" EntityType="oversiiModel.State" />
+          <AssociationSet Name="fk_Resident_Property" Association="oversiiModel.fk_Resident_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Resident_SubDivision" Association="oversiiModel.fk_Resident_SubDivision">
+            <End Role="SubDivision" EntitySet="SubDivisions" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vehicle_state" Association="oversiiModel.fk_vehicle_state">
+            <End Role="State" EntitySet="States" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <FunctionImport Name="GetState" EntitySet="States" ReturnType="Collection(oversiiModel.State)" />
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1744,6 +1816,7 @@
           <NavigationProperty Name="PropertyManagement" Relationship="oversiiModel.fk_property_propertymangementid" FromRole="Property" ToRole="PropertyManagement" />
           <NavigationProperty Name="ProperytViolations" Relationship="oversiiModel.fk_ProperytViolation_Property" FromRole="Property" ToRole="ProperytViolation" />
           <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_property" FromRole="Property" ToRole="Varience" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.fk_Resident_Property" FromRole="Property" ToRole="Resident" />
         </EntityType>
         <EntityType Name="PropertyHistoryTrackingType">
           <Key>
@@ -1805,6 +1878,8 @@
           <NavigationProperty Name="User" Relationship="oversiiModel.fk_resident_user" FromRole="Resident" ToRole="User" />
           <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_resient" FromRole="Resident" ToRole="Vehicle" />
           <NavigationProperty Name="Addresses" Relationship="oversiiModel.ResidentMailingAddress" FromRole="Resident" ToRole="Address" />
+          <NavigationProperty Name="Property" Relationship="oversiiModel.fk_Resident_Property" FromRole="Resident" ToRole="Property" />
+          <NavigationProperty Name="SubDivision" Relationship="oversiiModel.fk_Resident_SubDivision" FromRole="Resident" ToRole="SubDivision" />
         </EntityType>
         <EntityType Name="ResidentStatu">
           <Key>
@@ -1851,6 +1926,7 @@
           <NavigationProperty Name="Streets" Relationship="oversiiModel.fk_street_subdivision" FromRole="SubDivision" ToRole="Street" />
           <NavigationProperty Name="SubDivisionManagers" Relationship="oversiiModel.fk_subdivisionmanger_Subdivision" FromRole="SubDivision" ToRole="SubDivisionManager" />
           <NavigationProperty Name="Variences" Relationship="oversiiModel.fk_varience_subdivision" FromRole="SubDivision" ToRole="Varience" />
+          <NavigationProperty Name="Residents" Relationship="oversiiModel.fk_Resident_SubDivision" FromRole="SubDivision" ToRole="Resident" />
         </EntityType>
         <EntityType Name="SubDivisionManager">
           <Key>
@@ -1925,13 +2001,14 @@
           <Property Name="ResidentId" Type="Int32" Nullable="false" />
           <Property Name="MakeYear" Type="Int16" />
           <Property Name="LicPlateNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="LicPlateState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="AudittrailID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Audittrail" Relationship="oversiiModel.fk_vehicle_audittral" FromRole="Vehicle" ToRole="Audittrail" />
           <NavigationProperty Name="Resident" Relationship="oversiiModel.fk_vehicle_resient" FromRole="Vehicle" ToRole="Resident" />
           <NavigationProperty Name="VehicleColor" Relationship="oversiiModel.fk_vehicle_vehiclecolor" FromRole="Vehicle" ToRole="VehicleColor" />
           <NavigationProperty Name="VehicleMake" Relationship="oversiiModel.fk_vehicle_vehiclemake" FromRole="Vehicle" ToRole="VehicleMake" />
           <NavigationProperty Name="Permits" Relationship="oversiiModel.fk_permit_vehicle" FromRole="Vehicle" ToRole="Permit" />
+          <Property Name="LicPlateStateID" Type="Int32" />
+          <NavigationProperty Name="State" Relationship="oversiiModel.fk_vehicle_state" FromRole="Vehicle" ToRole="State" />
         </EntityType>
         <EntityType Name="VehicleColor">
           <Key>
@@ -2635,6 +2712,51 @@
         </Association>
         <ComplexType Name="VehiclePermit" >
         </ComplexType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="State1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vehicles" Relationship="oversiiModel.fk_vehicle_state" FromRole="State" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="fk_Resident_Property">
+          <End Type="oversiiModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="PropID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Resident_SubDivision">
+          <End Type="oversiiModel.SubDivision" Role="SubDivision" Multiplicity="1" />
+          <End Type="oversiiModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDivision">
+              <PropertyRef Name="SubDivisionID" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="SubDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vehicle_state">
+          <End Type="oversiiModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="oversiiModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="LicPlateStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2925,8 +3047,8 @@
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="oversiiModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="LicPlateStateID" ColumnName="LicPlateStateID" />
                 <ScalarProperty Name="AudittrailID" ColumnName="AudittrailID" />
-                <ScalarProperty Name="LicPlateState" ColumnName="LicPlateState" />
                 <ScalarProperty Name="LicPlateNum" ColumnName="LicPlateNum" />
                 <ScalarProperty Name="MakeYear" ColumnName="MakeYear" />
                 <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
@@ -2993,7 +3115,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetVehicleMake" FunctionName="oversiiModel.Store.SelectVehicleColor" />
           <FunctionImportMapping FunctionImportName="GetVehicleColor" FunctionName="oversiiModel.Store.SelectVehicleColor" />
-          <FunctionImportMapping FunctionImportName="ApplyPermit" FunctionName="oversiiModel.Store.insertpermit" />
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="oversiiModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="State1" ColumnName="State" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetState" FunctionName="oversiiModel.Store.SelectState" />
+          <FunctionImportMapping FunctionImportName="ApplyPermit" FunctionName="oversiiModel.Store.ApplyPermit" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
